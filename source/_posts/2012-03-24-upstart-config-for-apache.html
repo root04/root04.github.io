@@ -1,0 +1,118 @@
+---
+layout: post
+title: "upstart config for apache"
+date: 2012-03-24T10:50:00-07:00
+comments: false
+---
+
+
+<div class='post'>
+I realized I've never written a script(or say config file) for upstart.
+<br />
+<br />And apache2 is gonna be the first sacrifice here...which didn't succeed...
+<br />
+<br />I couldn't get apache to be working without NO_DETACH.
+<br />
+<br />I guess the PID trace thing with upstart don't support what apache does.
+<br />
+<br />And I haven't been able to get rid of a weird error/warning thats out on
+<br />
+<br /># stop apache2
+<br />
+<br />But it looks like start/stop is working... I give up for today...
+<br />
+<br />------------------------cut from here------------------------
+<br />
+<br />
+<br />description "Apache(HTTPD) Server"
+<br />author &nbsp; &nbsp; &nbsp;"hogehoge"
+<br />
+<br />start on (local-filesystems
+<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and net-device-up
+<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and runlevel [2345])
+<br />stop on runlevel [!2345]
+<br />
+<br />respawn
+<br />
+<br />env APPNAME=apache2
+<br />env LOCKDIR=/var/run/apache2
+<br />env HTTPD_ENV=/etc/default/apache2
+<br />env EXECCMD_START="/usr/local/httpd/bin/apachectl start"
+<br />env EXECCMD_STOP="/usr/local/httpd/bin/apachectl stop"
+<br />env CONF=/usr/local/httpd/conf/httpd.conf
+<br />env EXPECTPATH="/usr/bin/expect"
+<br />env EXPECTTIMEOUT=100
+<br />env TAILPATH="/usr/bin/tail"
+<br />env TAILOPT="--lines=1 -f"
+<br />env PKILLPATH="/usr/bin/pkill"
+<br />env PKILLSIG=" -9 "
+<br />env PKILLOPT=" -f "
+<br />env CHKWORD="caught SIGTERM, shutting down"
+<br />env PROCWORD="/bin/httpd "
+<br />env PGREP=/usr/bin/pgrep
+<br />env EXECUSER="root"
+<br />env PROCFLG="/usr/bin/pgrep -f -u root bin/httpd &gt; /dev/null &amp;&amp; echo FOUND || echo NOTFOUND"
+<br />
+<br />pre-start script
+<br />
+<br />&nbsp; #Sanity checks
+<br />&nbsp; [ -r ${HOME}/httpd.conf ] || install -o httpd -g httpd -m 755 -d ${LOCKDIR}
+<br />&nbsp; #[ -r ${HTTPD_ENV} ] &amp;&amp; . ${HTTPD_ENV}
+<br />&nbsp; if [ "x${PROCFLG}" = "xFOUND" &nbsp;]; then
+<br />&nbsp; &nbsp; echo "${APPNAME} Found !!"
+<br />&nbsp; &nbsp; exit 1
+<br />&nbsp; fi
+<br />&nbsp; #emits apache2_starting
+<br />end script
+<br />
+<br />script
+<br />&nbsp; #logger -t "$0" "DEBUG: `set`"
+<br />&nbsp; #expect fork
+<br />&nbsp; #exec ${EXECCMD_START} -D NO_DETACH -f ${CONF}
+<br />&nbsp; exec /usr/local/httpd/bin/httpd -D NO_DETACH -f /usr/local/httpd/conf/httpd.conf
+<br />&nbsp; #exec ${HOME}/bin/httpd -D NO_DETACH -f ${CONF}
+<br />&nbsp; #exec /usr/sbin/apache2 -X -e debug -E /var/log/apache2/foo.log
+<br />end script
+<br />
+<br />post-stop script
+<br />
+<br />&nbsp; if [ "x${PROCFLG}" = "xNOTFOUND" &nbsp;]; then
+<br />&nbsp; &nbsp; echo "Stopped ${APPNAME} successfully or it hadn't been started in the first place."
+<br />&nbsp; &nbsp; exit 0
+<br />&nbsp; fi
+<br />
+<br />&nbsp; ${EXECCMD_STOP}
+<br />&nbsp; ${EXPECTPATH} &lt;&lt;EOF
+<br />&nbsp; set timeout ${EXPECTTIMEOUT}
+<br />&nbsp; log_file log-stop.txt
+<br />&nbsp; spawn ${TAILPATH} ${TAILOPT} ${TARGETLOG}
+<br />&nbsp; expect "${CHKWORD}"
+<br />&nbsp; &nbsp; {
+<br />&nbsp; &nbsp; &nbsp; puts "OK. Normally shut down."
+<br />&nbsp; &nbsp; }
+<br />&nbsp; &nbsp; timeout
+<br />&nbsp; &nbsp; {
+<br />&nbsp; &nbsp; &nbsp; puts "NG. Can't shutdown. Execute Kill Process"
+<br />&nbsp; &nbsp; &nbsp; system "${PKILLPATH} ${PKILLSIG} ${PKILLOPT} ${PROCWORD} "
+<br />&nbsp; &nbsp; &nbsp; exit 1
+<br />&nbsp; &nbsp; }
+<br />&nbsp; EOF
+<br />&nbsp; RC=$?
+<br />&nbsp; if [ ${RC} != 0 ]; then
+<br />&nbsp; &nbsp; exit ${RC}
+<br />&nbsp; fi
+<br />&nbsp; }
+<br />end script
+<br />
+<div>
+<br />
+</div>
+<br />
+<div>-------------------------------------------------------------
+<br />
+<div>
+<br />
+</div>
+<br />
+</div>
+</div>

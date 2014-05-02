@@ -1,0 +1,45 @@
+---
+layout: post
+title: "postmirror.sh"
+date: 2011-12-11T00:16:00-08:00
+comments: false
+---
+
+
+<div class='post'>
+  apt-mirror didnt really get everything ready for me.  <br />
+  which took me to some googling.  <br />
+  and found that I need to execute something like the following.  <br /> <br />
+  ====== here ====== <br />
+  #!/bin/sh -e <br /> <br />
+  RSYNCSOURCE=rsync://jp.archive.ubuntu.com/ubuntu <br />
+  BASEDIR=/usr/local/repository_mirror/mirror/archive.ubuntu.com/ubuntu/ <br /> <br />
+  # oneiric dists <br />
+  rsync --recursive --times --links --hard-links \ <br />
+  &nbsp; &nbsp; &nbsp; --exclude "Packages*" --exclude "Sources*" --exclude "Release*" --no-motd \ <br />
+  &nbsp; &nbsp; &nbsp; ${RSYNCSOURCE}/dists/oneiric/ ${BASEDIR}/dists/oneiric/ <br /> <br />
+  rsync --recursive --times --links --hard-links --delete --delete-after --no-motd \ <br />
+  &nbsp; &nbsp; &nbsp; ${RSYNCSOURCE}/dists/oneiric/ ${BASEDIR}/dists/oneiric/ <br /> <br />
+  # oneiric-update dists <br />
+  rsync --recursive --times --links --hard-links \ <br />
+  &nbsp; &nbsp; &nbsp; --exclude "Packages*" --exclude "Sources*" --exclude "Release*" --no-motd \ <br />
+  &nbsp; &nbsp; &nbsp; ${RSYNCSOURCE}/dists/oneiric-updates/ ${BASEDIR}/dists/oneiric-updates/ <br /> <br />
+  rsync --recursive --times --links --hard-links --delete --delete-after --no-motd \ <br />
+  &nbsp; &nbsp; &nbsp; ${RSYNCSOURCE}/dists/oneiric-updates/ ${BASEDIR}/dists/oneiric-updates/ <br /> <br />
+  # oneiric-security dists <br />
+  rsync --recursive --times --links --hard-links \ <br />
+  &nbsp; &nbsp; &nbsp; --exclude "Packages*" --exclude "Sources*" --exclude "Release*" --no-motd \ <br />
+  &nbsp; &nbsp; &nbsp; ${RSYNCSOURCE}/dists/oneiric-security/ ${BASEDIR}/dists/oneiric-security/ <br /> <br />
+  rsync --recursive --times --links --hard-links --delete --delete-after --no-motd \ <br />
+  &nbsp; &nbsp; &nbsp; ${RSYNCSOURCE}/dists/oneiric-security/ ${BASEDIR}/dists/oneiric-security/ <br /> <br />
+  ====== to here ====== <br />
+  this will get me everything ready.  <br /> <br />
+  <div id="extensionsWeblioEjBx" style="display: none; left: 339px; position: absolute; top: 28px; z-index: 2147483647;">
+    <iframe border="0" frameborder="0" height="60" name="weblioExtensionsFrame" onmouseout="localStorage['weblioObjFlg'] = 2;" onmouseover="localStorage['weblioObjFlg'] = 1;" scrolling="no" src="http://api.weblio.jp/act/quote/v_1_0/e/?q=ready&amp;type=emicro&amp;opul=chrome-extension%3A%2F%2Foingodpdjohhkelnginmkagmkbplgema%2Foptions.html" width="320">
+    </iframe>
+  </div>
+  <div id="extensionsWeblioEjBx" style="display: none; left: 315px; position: absolute; top: 29px; z-index: 2147483647;">
+    <iframe border="0" frameborder="0" height="60" name="weblioExtensionsFrame" onmouseout="localStorage['weblioObjFlg'] = 2;" onmouseover="localStorage['weblioObjFlg'] = 1;" scrolling="no" src="http://api.weblio.jp/act/quote/v_1_0/e/?q=ready&amp;type=emicro&amp;opul=chrome-extension%3A%2F%2Foingodpdjohhkelnginmkagmkbplgema%2Foptions.html" width="320">
+    </iframe>
+  </div>
+</div>

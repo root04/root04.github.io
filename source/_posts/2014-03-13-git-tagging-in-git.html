@@ -1,0 +1,148 @@
+---
+layout: post
+title: "[git] tagging in git"
+date: 2014-03-13T20:02:00-07:00
+comments: false
+categories:
+ - git
+---
+
+
+<div class='post'>
+These are some commands I use when taggin in git.
+<br />
+<br />Or say...some commands I will be using, since I haven't really started using them.
+<br />
+<br />
+<h4>Work flow of git in my environment.
+</h4>
+<ul>
+<li>debugging in master branch
+</li>
+<li>little bug fix in master branch
+</li>
+<li>new branches for major fix/new features
+</li>
+</ul>(beware that I'm developing alone)
+<br />
+<br />
+<h4>What I want to accomplish
+</h4>
+<ul>
+<li>I want to tag the source before releasing
+</li>
+<li>I want to maintain files(add/delete/change revision) in exisisting tags
+</li>
+<li>I want to accomplish this easily
+</li>
+<li>I want to learn git
+</li>
+</ul>Maybe this is my goal for today.
+<br />
+<br />And from what I've googled so far...
+<br />Tag in git doesn't tag files. It tags to the commit.
+<br />So I'll follow that rule.
+<br />
+<h4>What I want to accomplish(fixed)
+</h4>
+<ul>
+<li>I want to tag the source before releasing
+</li>
+<li>I want to maintain existing tags (tag different commit)
+</li>
+<li>I want to accomplish this easily
+</li>
+<li>I want to learn git
+</li>
+</ul>OK, now I'll list some commands I would probably use frequently.
+<br />
+<br />
+<h4>Check each tags' annotation
+</h4>Check out what this tag's for !
+<br />
+<pre class="prettyprint">
+<span style="font-size: small;">$ git tag -n
+</span>
+</pre>
+<br />
+<h4>Edit annotations in existing tags
+</h4>it looks like this command will overwrite a "tagname" with a "tagname".
+<br />
+<pre class="prettyprint">
+<span style="font-size: small;">$ git tag tagname tagname -f -m *annotation*
+</span>
+</pre>
+<br />
+<h4>Get diff of a tag and HEAD
+</h4>
+<pre class="prettyprint">
+<span style="font-size: small;">$ git diff tagname HEAD
+</span>
+</pre>
+<br />
+<h4>Get rough diff of a tag and HEAD
+</h4>
+<pre class="prettyprint">
+<span style="font-size: small;">$ git diff --stat --color tagname HEAD
+</span>
+</pre>
+<br />
+<h4>Tag HEAD
+</h4>
+<pre class="prettyprint">
+<span style="font-size: small;">$ git tag -a tagname
+<br />$ git tag -a tagname -m "annotation"
+<br />
+</span>
+</pre>
+<br />
+<h4>Tag commit
+</h4>
+<pre class="prettyprint">
+<span style="font-size: small;">$ git tag tagname commit
+</span>
+</pre>
+<br />
+<h4>Check changes in each commit
+</h4>
+<pre class="prettyprint">
+<span style="font-size: small;">$ git log --stat
+<br />$ git log --numstat
+<br />$ git log --numstate
+<br />$ git log --name-status
+<br />$ git log --name-only
+<br />
+</span>
+</pre>
+<br />
+<h4>Check coresponding commit to a tag
+</h4>
+<pre class="prettyprint">
+<span style="font-size: small;">$ git show tagname
+<br />
+</span>
+</pre>
+<h4>Overall flow to what I want to accomplish
+</h4>2patterns so far.
+<br />
+<br />
+<h4>Pattern1
+</h4>tag to HEAD!!!! pattern. 
+<br />Execute the command in 
+<ul>
+<li>Tag HEAD
+</li>
+</ul>
+<br />
+<h4>Pattern2
+</h4>Maintaining the tag(changing a commit in a tag) pattern. 
+<br />
+<ul>
+<li>Read "Check each tags' annotation" part and decide which tag to change
+</li>
+<li>Take diff of the tag and the commit to decide which commit to relate to tag
+</li>
+<li>Read "Tag commit" part and tag a commit
+</li>
+</ul>That should do it.
+</div>
