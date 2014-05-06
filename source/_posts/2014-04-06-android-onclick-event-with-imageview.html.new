@@ -1,0 +1,122 @@
+  <body >
+    <p >
+      ---
+layout: post
+title: "[Android] onClick event with ImageView"
+date: 2014-04-06T06:42:00-07:00
+comments: false
+categories:
+ - Android
+---
+    </p>
+    <div  class=post>
+      <h3 >
+        Purpose
+      </h3>
+      As said in the title.
+      <br>
+      It was my first shot using onClick event with ImageView, so just for memo.
+      <br>
+      (in fact it's my first Android development)
+      <br>
+      Keep in mind that this seem just to be one way of implementing onClick event with a view.
+      <br>
+      <br>
+      <h3 >
+        Details
+      </h3>
+      <fieldset >
+        <legend >
+          Follow these 2steps
+        </legend>
+        <ol >
+          <li >
+            set a function name that should be called on onClick event in XML file(say it's onClickEvent in this entry)
+          </li>
+          <li >
+            declare the onClickEvent in java file(Let's say we just pop a toast)
+          </li>
+        </ol>
+      </fieldset>
+      <br>
+      This is part of the XML file.
+      <pre  class=prettyprint>
+        <span  style=font-size: small;>
+          <ImageView
+          <br>
+          android:id="@+id/imageview01"
+          <br>
+          android:layout_width="wrap_content"
+          <br>
+          android:layout_height="wrap_content"
+          <br>
+          android:src="@drawable/image"
+          <br>
+          android:layout_gravity="bottom"
+          <br>
+          android:scaleType="fitEnd"
+          <br>
+          android:onClick="onClickEvent" />***** <- this Line !!!!
+          <br>
+        </span>
+      </pre>
+      Now, declare onClickEvent in the activity.
+      <br>
+      I use SherlockActivity, and SlidingMenu so it's a little messy, but it's ok to remove those.
+      <br>
+      <pre  class=prettyprint>
+        <span  style=font-size: small;>
+          public class MainActivity extends SherlockActivity {
+          <br>
+          <br>
+          @Override
+          <br>
+          protected void onCreate(Bundle savedInstanceState) {
+          <br>
+          super.onCreate(savedInstanceState);
+          <br>
+          setTheme(R.style.Theme_Sherlock);
+          <br>
+          <br>
+          setTitle(R.string.attach);
+          <br>
+          // set the content view
+          <br>
+          setContentView(R.layout.activity_main);
+          <br>
+          // configure the SlidingMenu
+          <br>
+          SlidingMenu menu = new SlidingMenu(this);
+          <br>
+          menu.setMode(SlidingMenu.LEFT);
+          <br>
+          menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+          <br>
+          menu.setShadowWidthRes(R.dimen.shadow_width);
+          <br>
+          menu.setShadowDrawable(R.drawable.shadow);
+          <br>
+          menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+          <br>
+          menu.setFadeDegree(0.35f);
+          <br>
+          menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+          <br>
+          menu.setMenu(R.layout.list);
+          <br>
+          }
+          <br>
+          <br>
+          public void onClickEntry(View v) {
+          <br>
+          Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG).show();
+          <br>
+          }
+          <br>
+          }
+          <br>
+        </span>
+      </pre>
+      And you should see the toast after the tap.
+    </div>
+  </body>

@@ -1,0 +1,53 @@
+  <body >
+    <p >
+      ---
+layout: post
+title: "[rails] Couldn't Find User With Id=sign_in"
+date: 2014-04-10T18:35:00-07:00
+comments: false
+categories:
+ - Ruby on Rails
+---
+    </p>
+    <div  class=post>
+      <h3 >
+        Background
+      </h3>
+      While using devise on rails3, I got the following error message.
+      <br>
+      <pre  class=prettyprint>
+        <span  style=font-size: small;>
+          Couldn't Find User With Id=sign_in Devise on Rails 3
+        </span>
+      </pre>
+      It was working yesterday, but not today.
+      <br>
+      <br>
+      <h3 >
+        Solution
+      </h3>
+      I checked config/routes.rb, and had
+      <br>
+      <pre  class=prettyprint>
+        <span  style=font-size: small;>
+          resources :users
+          <br>
+          devise_for :users
+          <br>
+        </span>
+      </pre>
+      which seemed to be interupting each other.
+      <br>
+      So I commented out resources :users, and it started to work fine.
+      <br>
+      I don't know why it kept working till yesterday...
+      <br>
+      <br>
+      <script  type=text/javascript>
+          ( function() {     if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };     var unit = {"publisher":"nemotohideaki","width":550,"height":250,"sid":"Chitika Default"};     var placement_id = window.CHITIKA.units.length;     window.CHITIKA.units.push(unit);     document.write('
+<div id="chitikaAdBlock-' + placement_id + '">
+</div>');     var s = document.createElement('script');     s.type = 'text/javascript';     s.src = '//cdn.chitika.net/getads.js';     try { document.getElementsByTagName('head')[0].appendChild(s); } catch(e) { document.write(s.outerHTML); } }()); 
+
+      </script>
+    </div>
+  </body>
