@@ -7,16 +7,28 @@ categories:
  - mutt
 ---
 <div  class=post>
-  <br>
   I always fail to set the correct keycode when setting key bind for mutt.  <br> <br>
   So some tips I'll leave here.  <br> <br>
-  1. boot mutt <br>
-  2. in index mode, type following <br> <br>
-  :exec what-key <br> <br>
-  3. press the key/keys you want to know the keycode for <br> <br>
-  4. check the result <br>
-  (following example pressed "p") <br> <br>
-  Char = p, Octal = 160, Decimal = 112 <br>
-  5. set the key binding in muttrc <br>
+  <!-- more -->
+  <ol>
+  <li>
+    boot mutt
+  </li>
+  <li>
+    in index mode, type following <br>
+    :exec what-key
+  </li>
+  <li>
+    press the key/keys you want to know the keycode for
+  </li>
+  <li>
+    check the result <br>
+    (following example pressed "p") <br>
+    Char = p, Octal = 160, Decimal = 112
+  </li>
+  <li>
+    set the key binding in muttrc
+  </li>
+  </ol>
   that's it.  <br>
 </div>
