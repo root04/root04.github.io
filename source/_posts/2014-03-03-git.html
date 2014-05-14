@@ -24,6 +24,7 @@ categories:
     </li>
   </ul>
   1人でテキトウに作ってるのでなんとなくな感じです。 <br> <br>
+  <!-- more -->
   <h4 >
     大体やりたいこと
   </h4>
@@ -65,14 +66,13 @@ categories:
   くらいかなぁ。 <br>
   では、以下で実際使いそうなコマンドたちを羅列。 <br> <br>
   <h4 >
-    各tagのアノテーションを確認する
+    <a name="checkannotation">各tagのアノテーションを確認する</a>
   </h4>
   このタグなんのタグ？ってときに。 <br>
   <pre  class=prettyprint>
     <span  style=font-size: small;>
       $ git tag -n
-    </span>
-  </pre>
+    </span> </pre>
   <br>
   <h4 >
     既存tagのアノテーションを編集する
@@ -81,8 +81,7 @@ categories:
   <pre  class=prettyprint>
     <span  style=font-size: small;>
       $ git tag tagname tagname -f -m *annotation*
-    </span>
-  </pre>
+    </span> </pre>
   <br>
   <h4 >
     任意のtagとHEADのdiffを取る
@@ -90,60 +89,52 @@ categories:
   <pre  class=prettyprint>
     <span  style=font-size: small;>
       $ git diff tagname HEAD
-    </span>
-  </pre>
+    </span> </pre>
   <br>
   <h4 >
-    任意のtagとHEADのざっくりdiffを取る
+    <a name="zakkuridiff">任意のtagとHEADのざっくりdiffを取る</a>
   </h4>
   <pre  class=prettyprint>
     <span  style=font-size: small;>
       $ git diff --stat --color tagname HEAD
-    </span>
-  </pre>
+    </span> </pre>
   <br>
   <h4 >
-    HEADに、任意のtagを打つ
+    <a name="taghead">HEADに、任意のtagを打つ</a>
   </h4>
   <pre  class=prettyprint>
     <span  style=font-size: small;>
       $ git tag -a tagname
-      <br>
       $ git tag -a tagname -m "annotation"
-      <br>
-    </span>
-  </pre>
+    </span> </pre>
   <br>
   <h4 >
-    任意のcommitに、任意のtagを打つ
+    <a name="tagcommit">任意のcommitに、任意のtagを打つ</a>
   </h4>
   <pre  class=prettyprint>
     <span  style=font-size: small;>
       $ git tag tagname commit
-    </span>
-  </pre>
+    </span> </pre>
   <br>
   <h4 >
-    各commitで変更されたファイルを確認する
+    <a name="checkchange">各commitで変更されたファイルを確認する</a>
   </h4>
   <pre  class=prettyprint>
     <span  style=font-size: small;>
-      $ git log --stat <br>
-      $ git log --numstat <br>
-      $ git log --numstate <br>
-      $ git log --name-status <br>
-      $ git log --name-only <br>
-    </span>
-  </pre>
+      $ git log --stat
+      $ git log --numstat
+      $ git log --numstate
+      $ git log --name-status
+      $ git log --name-only
+    </span> </pre>
   <br>
   <h4 >
     各tagに対応するcommitを確認する
   </h4>
   <pre  class=prettyprint>
     <span  style=font-size: small;>
-      $ git show tagname <br>
-    </span>
-  </pre>
+      $ git show tagname
+    </span> </pre>
   <h4 >
     全体的なフロー
   </h4>
@@ -154,7 +145,7 @@ categories:
   HEADにこのtag打っちゃえ～！！やっほ～！！！のパターン。 <br>
   <ul >
     <li >
-      HEADに、任意のtagを打つ
+      <a href="#taghead">HEADに、任意のtagを打つ</a>
     </li>
   </ul>
   をやればOK。 <br>
@@ -164,13 +155,13 @@ categories:
   あー、tag間違って打った・・・どのcommitに打ちなおすんだっけ・・・。のパターン。 <br>
   <ul >
     <li >
-      各tagのアノテーションを確認する、でアノテーション見て修正するtagを決める
+      <a href="#checkannotation">各tagのアノテーションを確認</a>する、でアノテーション見て修正するtagを決める
     </li>
     <li >
-      任意のtagとcommitのざっくりdiffを取る ＆ 各commitで変更されたファイルを確認して、正しいcommitを探す
+      <a href="#zakkuridiff">任意のtagとcommitのざっくりdiffを取る</a> ＆ <a href="#checkchange">各commitで変更されたファイルを確認</a>して、正しいcommitを探す
     </li>
     <li >
-      任意のcommitに、任意のtagを打つ
+      <a href="#tagcommit">任意のcommitに、任意のtagを打つ</a>
     </li>
   </ul>
   これできっといけるはず。

@@ -46,9 +46,9 @@ categories:
   And from what I've googled so far...  <br>
   Tag in git doesn't tag files. It tags to the commit.  <br>
   So I'll follow that rule.  <br><br>
-  <h3 >
+  <h4 >
     What I want to accomplish(fixed)
-  </h3>
+  </h4>
   <ul >
     <li >
       I want to tag the source before releasing
@@ -64,89 +64,101 @@ categories:
     </li>
   </ul>
   OK, now I'll list some commands I would probably use frequently.  <br> <br>
-  <h3 >
-    Check each tags' annotation
-  </h3>
+  <h4 >
+    <a name="checkeachtagsannotation">Check each tags' annotation</a>
+  </h4>
   Check out what this tag's for !  <br>
   <pre  class=prettyprint>
     $ git tag -n </pre>
-  <br>
-  <h3 >
+
+  <h4 >
     Edit annotations in existing tags
-  </h3>
+  </h4>
   it looks like this command will overwrite a "tagname" with a "tagname".  <br>
   <pre  class=prettyprint>
       $ git tag tagname tagname -f -m *annotation* </pre>
-  <br>
-  <h3 >
+
+  <h4 >
     Get diff of a tag and HEAD
-  </h3>
+  </h4>
   <pre  class=prettyprint>
     $ git diff tagname HEAD </pre>
-  <br>
-  <h3 >
-    Get rough diff of a tag and HEAD
-  </h3>
+
+  <h4 >
+    <a name="takediff">Get rough diff of a tag and HEAD</a>
+  </h4>
   <pre  class=prettyprint>
       $ git diff --stat --color tagname HEAD </pre>
-  <br>
-  <h3 >
-    Tag HEAD
-  </h3>
+
+  <h4 >
+    <a name="taghead">Tag HEAD</a>
+  </h4>
   <pre  class=prettyprint>
     $ git tag -a tagname
     $ git tag -a tagname -m "annotation" </pre>
-  <br>
-  <h3 >
-    Tag commit
-  </h3>
+
+  <h4 >
+    <a name="tagcommit">Tag commit</a>
+  </h4>
   <pre  class=prettyprint>
     $ git tag tagname commit </pre>
-  <br>
-  <h3 >
+
+  <h4 >
     Check changes in each commit
-  </h3>
+  </h4>
   <pre  class=prettyprint>
     $ git log --stat
     $ git log --numstat
     $ git log --numstate
     $ git log --name-status
     $ git log --name-only </pre>
-  <br>
-  <h3 >
+  <h4 >
     Check coresponding commit to a tag
-  </h3>
+  </h4>
   <pre  class=prettyprint>
     $ git show tagname </pre>
+  <br>
+
   <h3 >
     Overall flow to what I want to accomplish
   </h3>
   2patterns so far.  <br> <br>
-  <h3 >
+  <h4 >
     Pattern1
-  </h3>
-  tag to HEAD!!!! pattern.  <br>
-  Execute the command in
-  <ul >
-    <li >
-      Tag HEAD
-    </li>
-  </ul>
+  </h4>
+  <fieldset >
+    <legend >
+      tag to HEAD!!!! pattern.  <br>
+      Execute the command in
+    </legend>
+    <ul >
+      <li >
+        <a href="#taghead">Tag HEAD</a>
+      </li>
+    </ul>
+  </fieldset>
   <br>
-  <h3 >
+  <h4 >
     Pattern2
-  </h3>
-  Maintaining the tag(changing a commit in a tag) pattern.  <br>
-  <ul >
-    <li >
-      Read "Check each tags' annotation" part and decide which tag to change
-    </li>
-    <li >
-      Take diff of the tag and the commit to decide which commit to relate to tag
-    </li>
-    <li >
-      Read "Tag commit" part and tag a commit
-    </li>
-  </ul>
+  </h4>
+  <fieldset >
+    <legend >
+      Maintaining the tag(changing a commit in a tag) pattern.  <br>
+    </legend>
+    <ul >
+      <li >
+        Read <a href="#checkeachtagsannotation">Check each tags annotation</a> part and decide which tag to change
+      </li>
+      <li >
+        <a href="#takediff">Take diff of the tag and the commit</a> to decide which commit to relate to tag
+      </li>
+      <li >
+        Read <a href="#tagcommit">"Tag commit"</a> part and tag a commit
+      </li>
+    </ul>
+  </fieldset>
+
+
+
   That should do it.
 </div>

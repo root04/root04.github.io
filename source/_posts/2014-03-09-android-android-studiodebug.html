@@ -13,21 +13,21 @@ categories:
   </h4>
   ので、versionをさげた。 <br> <br>
   brew でversion下げるのはこんな感じ。 <br>
+  <!-- more -->
   <pre  class=prettyprint>
     <span  style=font-size: small;>
-      $ brew unlink gradle <br>
-      $ brew versions gradle <br>
-      $ cd /usr/local/Library/Formula/ <br>
-      $ git checkout <br>
-      <commit > <br>
-        /usr/local/Library/Formula/gradle.rb <br>
-        $ brew info gradle <br>
-        $ brew install gradle <br>
-      </commit>
-    </span>
-  </pre>
+      $ brew unlink gradle
+      $ brew versions gradle
+      $ cd /usr/local/Library/Formula/
+      $ git checkout
+      &lt;commit&gt;
+        /usr/local/Library/Formula/gradle.rb
+        $ brew info gradle
+        $ brew install gradle
+      &lt;/commit&gt;
+    </span> </pre>
   <br>
-  # <commit>は、brew versions gradleで表示されるのをコピペ <br> <br>
+  # &lt;commit&gt;は、brew versions gradleで表示されるのをコピペ <br> <br>
   <h4 >
     ビルドしたらエラー
   </h4>
@@ -38,18 +38,18 @@ categories:
   <pre  class=prettyprint>
     <span  style=font-size: small;>
       $ gradle compileDebugAidl --stacktrace --debug
-    </span>
-  </pre>
+    </span> </pre>
   <br>
-  こんなん打てばおっけー。 <br> <br>
+  こんなん打てばおっけー。 <br>
   これでやっと原因がわかる。 <br> <br>
   <h4 >
     libararyと、applicationの、minSdk/targetSdkをそろえる
   </h4>
   揃えないと怒られるので揃える。 <br> <br>
   <h4 >
-    Could not find element /manifest/application.
+    ビルドしたらまたエラー
   </h4>
+  Could not find element /manifest/application.<br>
   このエラー。意味不明なんだけど、検索したら、manifest mergerのbugらしい。 <br> <br>
   <a  href=http://stackoverflow.com/questions/16987512/building-android-studio-project-with-holoeverywhere-fails>ここ</a>
   に書いてあった。   全部の、AndroidManifest.xmlに、application要素が入ってないと出るらしいので、入ってなかったslidingmenuに
